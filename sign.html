@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account | ChefX</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Work Sans",sans-serif;
+}
+
+body{
+    background:#f8f7f5;
+    min-height:100vh;
+    color:#111;
+}
+
+
+.container{
+    display:flex;
+    min-height:100vh;
+}
+
+
+.left{
+    width:50%;
+    position:relative;
+    background:url("{{ url_for('static', filename='back1.png') }}");
+    background-size:cover;
+    background-position:center;
+}
+
+.overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient( top, rgba(35,25,15,0.85), transparent);
+    color:white;
+    padding:60px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+}
+
+.brand{
+    font-size:28px;
+    font-weight:800;
+    margin-bottom:20px;
+    color:#ff9c41;
+}
+
+.hero-title{
+    font-size:42px;
+    font-weight:900;
+    line-height:1.2;
+}
+
+.hero-title span{
+    color:#ff9c41;
+}
+
+.hero-text{
+    margin-top:15px;
+    font-size:18px;
+    color:#eee;
+    max-width:420px;
+}
+
+
+.right{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+}
+
+.form-box{
+    width:100%;
+    max-width:420px;
+}
+
+h2{
+    font-size:28px;
+    font-weight:800;
+}
+
+.subtitle{
+    color:#666;
+    margin:10px 0 25px;
+}
+
+
+.social{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-bottom:25px;
+}
+
+.btn-outline{
+    border:1px solid #ddd;
+    background:#fff;
+    padding:12px;
+    border-radius:8px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-outline:hover{
+    background:#f2f2f2;
+}
+
+.divider{
+    text-align:center;
+    margin:25px 0;
+    position:relative;
+}
+
+.divider::before{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:1px;
+    background:#ddd;
+    top:50%;
+    left:0;
+}
+
+.divider span{
+    background:#f8f7f5;
+    padding:0 12px;
+    position:relative;
+    color:#777;
+    font-size:14px;
+}
+
+
+.form-group{
+    margin-bottom:18px;
+}
+
+label{
+    display:block;
+    font-size:14px;
+    margin-bottom:6px;
+    font-weight:500;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"]{
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #ddd;
+    font-size:14px;
+    outline:none;
+}
+
+input:focus{
+    border-color:#ff9c41;
+}
+
+.small-text{
+    font-size:12px;
+    color:#777;
+    margin-top:5px;
+}
+
+
+.checkbox{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:14px;
+    color:#666;
+    margin-bottom:20px;
+}
+
+.checkbox a{
+    color:#ff9c41;
+    font-weight:600;
+    text-decoration:none;
+}
+
+
+.submit-btn{
+    width:100%;
+    background:#ff9c41;
+    border:none;
+    padding:14px;
+    color:white;
+    font-weight:700;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+}
+.submit-btn a{
+    text-decoration: none;
+    color: white;
+}
+.submit-btn:hover{
+    background:#e8892f;
+}
+
+
+.login-link{
+    text-align:center;
+    margin-top:30px;
+    color:#666;
+}
+
+.login-link a{
+    color:#ff9c41;
+    font-weight:700;
+    text-decoration:none;
+}
+
+
+@media(max-width:900px){
+    .left{
+        display:none;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+
+    <div class="left">
+        <div class="overlay">
+            <div class="brand">ChefX</div>
+            <div class="hero-title">
+                Master the art of <br>
+                <span>culinary sharing.</span>
+            </div>
+            <p class="hero-text">
+                Join thousands of home cooks and professional chefs sharing their secret recipes with the world.
+            </p>
+        </div>
+    </div>
+
+    
+    <div class="right">
+        <div class="form-box">
+
+            <h2>Create your account</h2>
+            <p class="subtitle">Start your flavor journey with us today.</p>
+
+            <div class="social">
+                <button class="btn-outline">Google</button>
+                <button class="btn-outline">Apple</button>
+            </div>
+
+            <div class="divider">
+                <span>Or continue with</span>
+            </div>
+
+            <form>
+
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Salman Khan">
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="Salu@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="••••••••">
+                    <div class="small-text">
+                        Must be at least 8 characters long.
+                    </div>
+                </div>
+
+                <div class="checkbox">
+                    <input type="checkbox">
+                    <label>
+                        I agree to the
+                        <a href="#">Terms of Service</a>
+                        and
+                        <a href="#">Privacy Policy</a>.
+                    </label>
+                </div>
+
+                <button type="submit" class="submit-btn">
+    Create Account
+</button>
+
+            </form>
+
+            <p class="login-link">
+                Already have an account?
+                <a href="{{ url_for('login_page') }}">Log in here</a>
+            </p>
+
+        </div>
+    </div>
+
+</div>
+<script>
+document.querySelector("form").addEventListener("submit", async function(e){
+    e.preventDefault();
+
+    const user = {
+        name: document.querySelector("input[type='text']").value.trim(),
+        email: document.querySelector("input[type='email']").value.trim(),
+        password: document.querySelector("input[type='password']").value.trim()
+    };
+
+    try {
+        const res = await fetch("/signup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(user)
+        });
+
+        const data = await res.json();
+
+        alert(data.message);
+
+        if (data.success) {
+            window.location.href = "{{ url_for('f1') }}"; // /f1
+        }
+
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Server error ❌ Please try again");
+    }
+});
+</script>
+</body>
+</html>
