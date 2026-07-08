@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About ChefX</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Work Sans', sans-serif;
+  background: #f8f7f5;
+  color: #0f172a;
+  overflow-x: hidden;
+}
+
+/* NAVBAR */
+nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  z-index: 1000;
+  transition: 0.4s;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo img{
+  width: 150px;
+  height: 50px;
+  transition: 0.5s;
+}
+
+.logo img:hover{
+  transform: scale(1.05);
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #64748b;
+  font-weight: 500;
+  position: relative;
+  transition: 0.4s;
+}
+
+.nav-links a::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0%;
+  height: 2px;
+  background: orange;
+  transition: 0.4s;
+}
+
+.nav-links a:hover::after{
+  width: 100%;
+}
+
+.nav-links a:hover{
+  color: orange;
+}
+
+/* BUTTONS */
+.btn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.btn-primary {
+  background: #ff9c41;
+  color: white;
+  box-shadow: 0 5px 15px rgba(255,156,65,0.3);
+}
+
+.btn:hover{
+  transform: translateY(-4px) scale(1.05);
+}
+
+/* HERO */
+.hero {
+  height: 600px;
+  display: flex;
+  align-items: center;
+  color: white;
+  margin-top: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: zoomIn 1.5s ease;
+  transition: 0.7s;
+}
+
+.hero img:hover{
+  transform: scale(1.05);
+}
+
+.hero-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(15,23,42,0.8), transparent);
+}
+
+.hero-content {
+  position: relative;
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 24px;
+  animation: slideLeft 1.2s ease;
+}
+
+.hero h1 {
+  font-size: 60px;
+  font-weight: 900;
+  margin-bottom: 20px;
+  animation: fadeUp 1s ease;
+}
+
+.hero span {
+  color: #ff9c41;
+}
+
+.hero p {
+  max-width: 500px;
+  font-size: 18px;
+  animation: fadeUp 1.4s ease;
+}
+
+/* SECTION */
+.section {
+  padding: 80px 20px;
+  animation: fadeSection 1.2s ease;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.section h2 {
+  font-size: 36px;
+  font-weight: 900;
+  margin-bottom: 20px;
+  transition: 0.4s;
+}
+
+.section h2{
+  position: relative;
+  display: inline-block;
+}
+
+.section h2::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 0%;
+  height: 4px;
+  border-radius: 10px;
+  background: linear-gradient(to right,#ff9c41,#ffb870);
+  transition: 0.5s;
+}
+
+.section h2:hover{
+  color: #ff9c41;
+}
+
+.section h2:hover::after{
+  width: 100%;
+}
+
+.section p {
+  color: #64748b;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+/* FEATURES */
+.feature {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+  padding: 22px;
+  border-radius: 18px;
+  background: white;
+  border: 1px solid transparent;
+
+  transition:
+    transform 0.5s ease,
+    box-shadow 0.5s ease,
+    border 0.5s ease,
+    background 0.5s ease;
+}
+
+/* MODERN HOVER */
+.feature:hover{
+  transform: translateY(-10px);
+  border: 1px solid rgba(255,156,65,0.25);
+
+  box-shadow:
+    0 15px 35px rgba(0,0,0,0.08),
+    0 5px 15px rgba(255,156,65,0.12);
+
+  background: linear-gradient(
+    to bottom right,
+    white,
+    #fff8f1
+  );
+}
+
+.feature h3{
+  font-size: 20px;
+  margin-bottom: 8px;
+  transition: 0.4s;
+}
+
+.feature p{
+  font-size: 15px;
+  line-height: 1.6;
+  transition: 0.4s;
+}
+
+/* TEXT EFFECT */
+.feature:hover h3{
+  color: #ff9c41;
+  transform: translateX(6px);
+}
+
+.feature:hover p{
+  color: #334155;
+  transform: translateX(4px);
+}
+/* IMAGE BOX */
+.image-box{
+  overflow: hidden;
+  border-radius: 20px;
+  position: relative;
+}
+
+.image-box img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.18);
+  transition: 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* PREMIUM HOVER EFFECT */
+.image-box:hover img{
+  transform: scale(1.12);
+  filter: brightness(1.05);
+}
+
+/* CTA */
+.cta {
+  background: #0f172a;
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+  border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+.cta::before{
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 50%;
+  top: -70px;
+  left: -70px;
+}
+
+.cta::after{
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 50%;
+  bottom: -90px;
+  right: -90px;
+}
+
+.cta:hover{
+  transform: translateY(-12px) scale(1.01);
+
+  box-shadow:
+    0 25px 60px rgba(0,0,0,0.25),
+    0 10px 25px rgba(255,156,65,0.12);
+}
+
+.cta h2 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.cta p {
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 30px;
+}
+
+/* FOOTER */
+footer {
+  padding: 40px 20px;
+  background: #f1f5f9;
+  border-top: 1px solid #ddd;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  margin-right: 20px;
+  color: #64748b;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.4s;
+}
+
+.footer-links a:hover{
+  color: orange;
+}
+
+/* RESPONSIVE */
+@media(max-width: 900px){
+
+  .grid{
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1{
+    font-size: 42px;
+  }
+
+  .hero{
+    height: 500px;
+  }
+
+  .nav-links{
+    gap: 15px;
+  }
+}
+
+@media(max-width: 768px){
+
+  .hero{
+    text-align: center;
+  }
+
+  .hero p{
+    margin: auto;
+  }
+
+  .nav-links{
+    display: none;
+  }
+
+  .hero h1{
+    font-size: 34px;
+  }
+
+  .cta h2{
+    font-size: 28px;
+  }
+}
+
+/* KEYFRAMES */
+
+@keyframes slideLeft{
+  from{
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to{
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes zoomIn{
+  from{
+    opacity: 0;
+    transform: scale(1.2);
+  }
+  to{
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeUp{
+  from{
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeSection{
+  from{
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-container">
+    <div class="logo">
+    <img src="{{ url_for('static', filename='chefximg.png') }}" alt="ChefX Logo">
+</div>
+    <div class="nav-links">
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="#">Community</a>
+      <a href="#">Popular Recipes</a>
+      <a href="{{ url_for('about') }}">About</a>
+    </div>
+   <a href="{{ url_for('login_page') }}" class="btn btn-primary">
+    Login
+</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOaP-h_mNDxrNySMGB8WhYVnoOvJCUO-dMPwy23eYAKNOn_uHlpm43XS_EY7g0lAbFR_mDDegBEnmqaaNKhvch_kdgFSqO21NWdf-AUbct2tLQ5rQ5VbK3bgwwJMCrhv1aASboSyUGBh_ckhFyXBWmcP-Dc_fqqot_RHno0-sao5Xbp45qyGcgGWk9jATF1g3cwY00L8S0761UpDvdTiPqEgkZYjc0DTq6r1lIwdqyxD8SDVjQcaqmDIKJQngQYK7F7Mo6IlffsA">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Crafting the Future of <span>Home Cooking</span></h1>
+    <p>ChefX is a sanctuary for the modern maker, blending artisanal traditions with digital precision.</p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section">
+  <div class="container grid">
+
+    <div>
+      <h2>Who We Are</h2>
+      <p>ChefX was born from a simple realization: that the heart of every home beats loudest when a meal is crafted with intention.</p>
+
+      <div class="feature">
+        <div>
+          <h3>Empowering Technology</h3>
+          <p>We bridge the gap between complex culinary techniques and new recipes.</p>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div>
+          <h3>Artisanal Craft</h3>
+          <p>We honor slow cooking traditions while making them achievable.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="image-box">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfGvSx27ywN-BLclsu0bfGDceJVme4NJ1bobsGPcTSGrbz_E9Uy34GruA4Ptdjm0_Jlr-yoBdeRu-QUxZbxjE6KxOHfkryd22KMTCXGQRbtQEPHatIkq7ARc1poAgACB1GXg1qZEWO3Wwn5iVLNRP7np-czXgh0cRg9swO3FF5IFR3z2mgf6pjuLKAKcdAtK-uJMEwVFxINgP41BM01hGymmYMvD3q_KjNx7f60EEUwa_bb1ewjlPmOJTf61e6ObXZ9iJGoJsF6A">
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="container">
+    <div class="cta">
+      <h2>Join the Saffron Hearth Community</h2>
+      <p>Whether you're a chef or beginner, there's a place for you.</p>
+      
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <div>
+      <h3>ChefX</h3>
+      <p>© 2026 ChefX</p>
+    </div>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>ChefX | Meal Planner</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;600;700;900&display=swap"
+    rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Work Sans', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #f8f7f5;
+      color: #0f172a;
+      overflow-x: hidden;
+    }
+
+    /* =========================
+       CONTAINER
+    ========================= */
+
+    .container {
+      width: 95%;
+      max-width: 1450px;
+      margin: auto;
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    .between {
+      justify-content: space-between;
+    }
+
+    .center {
+      align-items: center;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+
+      padding: 18px 0;
+
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+      transition: 0.4s;
+    }
+
+    .logo h1 {
+      font-size: 46px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: 0.4s;
+    }
+
+    .logo h1:hover {
+      transform: scale(1.05);
+    }
+
+    .logo span:last-child {
+      color: orange;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================= */
+
+    .nav {
+      display: flex;
+      gap: 40px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: #555;
+      font-size: 18px;
+      font-weight: 700;
+      position: relative;
+      transition: 0.4s;
+    }
+
+    .nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 0%;
+      height: 3px;
+      background: orange;
+      border-radius: 20px;
+      transition: 0.4s;
+    }
+
+    .nav a:hover::after,
+    .act::after {
+      width: 100%;
+    }
+
+    .nav a:hover,
+    .act {
+      color: orange;
+    }
+
+    /* =========================
+       ACTIONS
+    ========================= */
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .search {
+      width: 240px;
+      padding: 12px 16px;
+
+      border: none;
+      outline: none;
+
+      border-radius: 14px;
+
+      background: #f1f1f1;
+
+      transition: 0.4s;
+    }
+
+    .search:focus {
+      background: white;
+
+      transform: scale(1.03);
+
+      box-shadow:
+        0 0 20px rgba(255, 165, 0, 0.2);
+    }
+
+    #b1 {
+      border: none;
+      outline: none;
+
+      padding: 12px 20px;
+
+      border-radius: 14px;
+
+      background: black;
+      color: white;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition: 0.4s;
+    }
+
+    #b1:hover {
+      background: orange;
+
+      transform:
+        translateY(-4px) scale(1.05);
+
+      box-shadow:
+        0 15px 30px rgba(255, 165, 0, 0.3);
+    }
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    .main {
+      padding: 130px 25px 40px;
+    }
+
+    /* =========================
+       TOP SECTION
+    ========================= */
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      margin-bottom: 35px;
+    }
+
+    .top h1 {
+      font-size: 58px;
+      font-weight: 900;
+
+      animation: slideLeft 1s ease;
+    }
+
+    .view-toggle button {
+      border: none;
+      outline: none;
+
+      padding: 14px 24px;
+
+      border-radius: 14px;
+
+      background: orange;
+      color: white;
+
+      font-weight: 700;
+      font-size: 16px;
+
+      cursor: pointer;
+
+      transition: 0.4s;
+    }
+
+    .view-toggle button:hover {
+      transform:
+        translateY(-4px) scale(1.05);
+
+      box-shadow:
+        0 15px 30px rgba(255, 165, 0, 0.3);
+    }
+
+    /* =========================
+       GRID
+    ========================= */
+
+    .grid {
+      display: grid;
+
+      grid-template-columns: repeat(7, 1fr);
+
+      gap: 22px;
+    }
+
+    /* =========================
+       DAY CARD
+    ========================= */
+
+    .day {
+      background: white;
+
+      border-radius: 24px;
+
+      padding: 18px;
+
+      min-height: 370px;
+
+      display: flex;
+      flex-direction: column;
+
+      border: 1px solid rgba(0, 0, 0, 0.05);
+
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.05);
+
+      transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease,
+        background 0.4s ease;
+
+      animation: fadeUp 0.8s ease;
+    }
+
+    .day:hover {
+      transform: translateY(-10px);
+
+      background:
+        linear-gradient(to bottom right,
+          white,
+          #fff7ef);
+
+      border-color: rgba(255, 165, 0, 0.2);
+
+      box-shadow:
+        0 25px 45px rgba(0, 0, 0, 0.12),
+        0 12px 20px rgba(255, 165, 0, 0.08);
+    }
+
+    .day h4 {
+      font-size: 28px;
+      margin-bottom: 18px;
+      transition: 0.4s;
+    }
+
+    .day:hover h4 {
+      color: orange;
+    }
+
+    /* =========================
+       EMPTY TEXT
+    ========================= */
+
+    .empty {
+      color: #aaa;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    /* =========================
+       ADD BUTTON
+    ========================= */
+
+    .add {
+      margin-top: auto;
+
+      padding: 14px;
+
+      border-radius: 16px;
+
+      border: 2px dashed orange;
+
+      background: #fffaf3;
+
+      text-align: center;
+
+      font-size: 18px;
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition: 0.4s;
+    }
+
+    .add:hover {
+      background: orange;
+      color: white;
+
+      transform: scale(1.04);
+    }
+
+    /* =========================
+       MEAL CARD
+    ========================= */
+
+    .card {
+      background: #fafafa;
+
+      border-left: 5px solid orange;
+
+      border-radius: 16px;
+
+      padding: 15px;
+
+      margin-bottom: 14px;
+
+      cursor: pointer;
+
+      animation: pop 0.4s ease;
+
+      transition: 0.4s;
+    }
+
+    .card:hover {
+      transform:
+        translateX(6px) scale(1.02);
+
+      background: white;
+
+      box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .card span {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .card h3 {
+      margin-top: 5px;
+      font-size: 21px;
+      transition: 0.4s;
+    }
+
+    .card:hover h3 {
+      color: orange;
+    }
+
+    /* =========================
+       STATS
+    ========================= */
+
+    .stats {
+      margin-top: 50px;
+
+      background:
+        linear-gradient(135deg,
+          #111,
+          #1c1c1c);
+
+      border-radius: 28px;
+
+      padding: 35px;
+
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      flex-wrap: wrap;
+
+      gap: 25px;
+
+      color: white;
+
+      overflow: hidden;
+      position: relative;
+
+      transition: 0.5s;
+    }
+
+    .stats:hover {
+      transform: translateY(-8px);
+
+      box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.25);
+    }
+
+    .stats div {
+      text-align: center;
+      cursor: pointer;
+      transition: 0.4s;
+      z-index: 2;
+    }
+
+    .stats div:hover {
+      transform: scale(1.08);
+    }
+
+    .stats h2 {
+      font-size: 42px;
+      color: orange;
+      margin-bottom: 8px;
+    }
+
+    .stats p {
+      color: #ddd;
+      font-size: 18px;
+    }
+    .card-buttons{
+  display:flex;
+  gap:10px;
+  margin-top:15px;
+}
+
+/* EDIT BUTTON */
+
+.edit-btn{
+  flex:1;
+
+  padding:8px;
+
+  border:none;
+
+  border-radius:10px;
+
+  background:#f1f1f1;
+
+  cursor:pointer;
+
+  font-weight:600;
+
+  transition:0.3s;
+}
+
+.edit-btn:hover{
+  background:orange;
+  color:white;
+}
+
+/* DELETE BUTTON */
+
+.delete-btn{
+  flex:1;
+
+  padding:8px;
+
+  border:none;
+
+  border-radius:10px;
+
+  background:#ffebeb;
+
+  color:#d60000;
+
+  cursor:pointer;
+
+  font-weight:600;
+
+  transition:0.3s;
+}
+
+.delete-btn:hover{
+  background:#ff3b3b;
+  color:white;
+}
+    /* =========================
+       ANIMATIONS
+    ========================= */
+
+    @keyframes slideLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-80px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pop {
+      0% {
+        opacity: 0;
+        transform: scale(0.7);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media(max-width:1300px) {
+      .grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media(max-width:900px) {
+
+      .header .container {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .actions {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+
+      .top h1 {
+        font-size: 42px;
+      }
+
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(max-width:600px) {
+
+      .main {
+        padding: 200px 15px 30px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .top h1 {
+        font-size: 34px;
+      }
+
+      .logo h1 {
+        font-size: 38px;
+      }
+
+      .search {
+        width: 100%;
+      }
+    }
+
+
+    /* CARD BUTTONS */
+
+
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header class="header">
+
+    <div class="container flex between center">
+
+      <div class="logo">
+        <h1>
+          <span>Chef</span><span>X</span>
+        </h1>
+      </div>
+
+     <nav class="nav">
+    <a href="{{ url_for('f1') }}">Home</a>
+    <a href="{{ url_for('mymeal') }}">Meal Plan</a>
+    <a href="{{ url_for('order') }}" class="act">Order</a>
+</nav>
+
+      <div class="actions">
+        <input type="text"
+          placeholder="Search ingredients..."
+          class="search">
+
+        <button id="b1">
+          + Create Plan
+        </button>
+      </div>
+
+    </div>
+
+  </header>
+
+  <!-- MAIN -->
+
+  <main class="main">
+
+    <div class="top">
+
+      <h1>Weekly Meal Plan 🥗</h1>
+
+      <div class="view-toggle">
+        <button onclick="window.location.reload();">
+          Refresh
+        </button>
+      </div>
+
+    </div>
+
+    
+
+    <div class="grid">
+
+      <div class="day">
+        <h4>Mon</h4>
+        <p class="empty">No meals added</p>
+        <div class="add">+ Add Dish</div>
+      </div>
+
+      <div class="day">
+        <h4>Tue</h4>
+        <p class="empty">No meals added</p>
+        <div class="add">+ Add Dish</div>
+      </div>
+
+      <div class="day">
+        <h4>Wed</h4>
+        <p class="empty">No meals added</p>
+        <div class="add">+ Add Dish</div>
+      </div>
+
+      <div class="day">
+        <h4>Thu</h4>
+        <p class="empty">No meals added</p>
+        <div class="add">+ Add Dish</div>
+      </div>
+
+      <div class="day">
+        <h4>Fri</h4>
+        <p class="empty">No meals added</p>
+        <div class="add">+ Add Dish</div>
+      </div>
+
+      <div class="day">
+        <h4>Sat</h4>
+        <p class="empty">No meals added</p>
+        <div class="add">+ Add Dish</div>
+      </div>
+
+      <div class="day">
+        <h4>Sun</h4>
+        <p class="empty">No meals added</p>
+        <div class="add">+ Add Dish</div>
+      </div>
+
+    </div>
+
+
+
+    <div class="stats">
+
+      <div>
+        <h2>1850</h2>
+        <p>Calories</p>
+      </div>
+
+      <div>
+        <h2>142g</h2>
+        <p>Protein</p>
+      </div>
+
+      <div>
+        <h2>180g</h2>
+        <p>Carbs</p>
+      </div>
+
+      <div>
+        <h2>58g</h2>
+        <p>Fats</p>
+      </div>
+
+    </div>
+
+  </main>
+
+<script>
+
+const addButtons = document.querySelectorAll(".add");
+
+addButtons.forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    const meal = prompt("Enter meal name");
+
+    if (meal && meal.trim() !== "") {
+
+      const day = button.parentElement;
+
+      const empty = day.querySelector(".empty");
+
+      if (empty) {
+        empty.remove();
+      }
+
+  
+
+      const card = document.createElement("div");
+
+      card.className = "card";
+
+      card.innerHTML = `
+      
+        <span>Dish</span>
+
+        <h3>${meal}</h3>
+
+        <div class="card-buttons">
+
+          <button class="edit-btn">
+            Edit
+          </button>
+
+          <button class="delete-btn">
+            Delete
+          </button>
+
+        </div>
+
+      `;
+
+    
+
+      day.insertBefore(card, button);
+
+
+      const editBtn = card.querySelector(".edit-btn");
+
+      editBtn.addEventListener("click", () => {
+
+        const currentMeal =
+          card.querySelector("h3").innerText;
+
+        const updatedMeal =
+          prompt("Edit meal name", currentMeal);
+
+        if (updatedMeal &&
+          updatedMeal.trim() !== "") {
+
+          card.querySelector("h3").innerText =
+            updatedMeal;
+        }
+
+      });
+
+
+
+      const deleteBtn =
+        card.querySelector(".delete-btn");
+
+      deleteBtn.addEventListener("click", () => {
+
+        card.remove();
+
+    
+
+        const remainingCards =
+          day.querySelectorAll(".card");
+
+        if (remainingCards.length === 0) {
+
+          const emptyText =
+            document.createElement("p");
+
+          emptyText.className = "empty";
+
+          emptyText.innerText =
+            "No meals added";
+
+          day.insertBefore(emptyText, button);
+        }
+
+      });
+
+    }
+
+  });
+
+});
+
+</script>
+
+</body>
+
+</html>
